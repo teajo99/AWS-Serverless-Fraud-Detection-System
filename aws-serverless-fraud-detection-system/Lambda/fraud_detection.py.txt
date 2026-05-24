@@ -1,0 +1,47 @@
+import json
+import boto3
+
+sns = boto3.client('sns')
+
+TOPIC_ARN = 'REPLACE_WITH_YOUR_SNS_TOPIC_ARN'
+
+def lambda_handler(event, context):
+
+    taxpayer = event['taxpayer']
+    income = event['income']
+    deductions = event['deductions']
+
+    suspicious = False
+    reasons = []
+
+    if income > 1000000:
+        suspicious = True
+        reasons.append("High income anomaly")
+
+    if deductions > income * 0.8:
+        suspicious = True
+        reasons.append("Excessive deductions")
+
+    if income < 0:
+        suspicious = True
+        reasons.append("Negative income")
+
+    if suspicious:
+        sns.publish(
+            TopicArn=TOPIC_ARN,
+            Subject="Fraud Alert",
+            Message=json.dumps({
+                "taxpayer": taxpayer,
+                "income": income,
+                "deductions": deductions,
+                "reasons": reasons
+            })
+        )
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "fraudDetected": suspicious,
+            "reasons": reasons
+        })
+    }

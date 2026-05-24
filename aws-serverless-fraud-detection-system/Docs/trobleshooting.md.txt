@@ -1,0 +1,48 @@
+# Troubleshooting Guide
+
+---
+
+## Issue 1: CloudWatch Log Group Missing
+
+### Error
+Log group does not exist:
+/aws/lambda/FraudDetectionFunction
+
+### Cause
+Lambda has never executed successfully.
+
+### Fix
+Run Lambda test manually once.
+
+---
+
+## Issue 2: No Messages in SQS
+
+### Cause
+SNS → SQS subscription misconfigured or missing permissions.
+
+### Fix
+- Ensure subscription is confirmed
+- Add SQS policy allowing SNS to publish
+
+---
+
+## Issue 3: SNS Not Triggering Email
+
+### Cause
+Email subscription not confirmed.
+
+### Fix
+Check inbox and confirm subscription link.
+
+---
+
+## Issue 4: Lambda Not Triggering
+
+### Cause
+EventBridge rule misconfigured.
+
+### Fix
+Check:
+- source = tax.portal
+- rule is enabled

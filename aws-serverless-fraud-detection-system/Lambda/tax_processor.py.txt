@@ -1,0 +1,42 @@
+import json
+import boto3
+import uuid
+from datetime import datetime
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('TaxAuditRecords')
+
+lambda_client = boto3.client('lambda')
+
+def lambda_handler(event, context):
+
+    detail = event['detail']
+
+    taxpayer = detail['taxpayer']
+    income = detail['income']
+    deductions = detail['deductions']
+
+    return_id = str(uuid.uuid4())
+
+    table.put_item(
+        Item={
+            'returnId': return_id,
+            'taxpayer': taxpayer,
+            'income': income,
+            'deductions': deductions,
+            'timestamp': datetime.utcnow().isoformat(),
+            'status': 'RECEIVED'
+        }
+    )
+
+    # Trigger fraud detection Lambda
+    lambda_client.invoke(
+        FunctionName='FraudDetectionFunction',
+        InvocationType='Event',
+        Payload=json.dumps(detail)
+    )
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Processed successfully')
+    }

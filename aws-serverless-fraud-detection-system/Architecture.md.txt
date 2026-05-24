@@ -1,0 +1,15 @@
+# Architecture Diagram (Text Version)
+
+Tax Submission Event
+        ↓
+Amazon EventBridge
+        ↓
+Lambda: Tax Processor
+        ↓
+Amazon DynamoDB (Audit Storage)
+        ↓
+Lambda: Fraud Detection
+        ↓
+Amazon SNS (Fraud Alerts)
+        ↓
+Amazon SQS + Email Subscribers

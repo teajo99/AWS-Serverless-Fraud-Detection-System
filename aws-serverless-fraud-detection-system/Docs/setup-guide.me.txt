@@ -1,0 +1,53 @@
+# Setup Guide
+
+## Step 1: Create DynamoDB Table
+- Table Name: TaxAuditRecords
+- Partition Key: returnId
+
+---
+
+## Step 2: Create SNS Topic
+- Name: FraudAlertsTopic
+
+---
+
+## Step 3: Create SQS Queue
+- Name: ComplianceReviewQueue
+
+---
+
+## Step 4: Subscribe SQS to SNS
+- Protocol: Amazon SQS
+- Endpoint: ComplianceReviewQueue ARN
+
+---
+
+## Step 5: Create Lambda Functions
+
+### TaxProcessorFunction
+- Runtime: Python 3.12
+- Attach IAM permissions:
+  - DynamoDB Full Access
+  - Lambda invoke permissions
+
+### FraudDetectionFunction
+- Runtime: Python 3.12
+- Add SNS publish permission
+
+---
+
+## Step 6: Create EventBridge Rule
+- Source: tax.portal
+- Target: TaxProcessorFunction
+
+---
+
+## Step 7: Test Event
+
+Send:
+
+{
+  "taxpayer": "John Smith",
+  "income": 2500000,
+  "deductions": 2200000
+}
