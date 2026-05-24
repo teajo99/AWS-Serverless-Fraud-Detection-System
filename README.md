@@ -1,3 +1,6 @@
+# Architecture Diagram 
+![image alt](https://github.com/teajo99/-AWS-Serverless-Fraud-Detection-System/blob/86c36f9552cb3377bd055f0faef41596ce151ab5/aws-serverless-fraud-detection-system/Architecture%20Diagram.png)
+
 # HMRC-Grade Serverless Tax Fraud Detection Platform (AWS)
  Overview
 
