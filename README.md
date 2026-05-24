@@ -1,4 +1,4 @@
-HMRC-Grade Serverless Tax Fraud Detection Platform (AWS)
+# HMRC-Grade Serverless Tax Fraud Detection Platform (AWS)
  Overview
 
 This project simulates a production-grade tax fraud detection system inspired by UK HM Revenue & Customs (HMRC) digital infrastructure.
@@ -7,7 +7,7 @@ It demonstrates how modern government systems process high-volume tax submission
 
 The system is designed with principles used in public sector financial systems, including scalability, resilience, traceability, and secure data processing.
 
- Business Problem
+ # Business Problem
 
 During peak tax filing periods, government systems face:
 
@@ -19,11 +19,11 @@ Requirement for high availability and fault tolerance
 
 Traditional monolithic systems struggle under this load, leading to delays, bottlenecks, and compliance risks.
 
- Solution Architecture
+# Solution Architecture
 
 This platform implements a fully decoupled event-driven architecture that automatically scales during peak load.
 
-Workflow
+# Workflow
 
 Tax Submission Event
 ↓
@@ -39,7 +39,7 @@ Amazon SNS (Real-Time Alert Distribution)
 ↓
 Amazon SQS + Email Notifications (Compliance Processing Layer)
 
- Cloud Technologies Used
+# Cloud Technologies Used
 Amazon Web Services
 Amazon EventBridge
 AWS Lambda
@@ -50,7 +50,7 @@ Fraud Detection Engine
 
 The system uses rule-based anomaly detection to identify suspicious tax behaviour in real time.
 
-Detection Criteria
+# Detection Criteria
 
 A tax submission is flagged when:
 
@@ -61,7 +61,7 @@ Behaviour deviates from expected tax filing patterns
 
 Each flagged case triggers an automated compliance alert workflow.
 
- System Design Principles
+System Design Principles
 Event-Driven Architecture
 
 All components communicate asynchronously through events, ensuring loose coupling and high scalability.
@@ -76,7 +76,7 @@ Every transaction is persisted for auditability and regulatory traceability.
 
  Microservice Decomposition
 
-Each function has a single responsibility:
+# Each function has a single responsibility:
 
 ingestion
 processing
@@ -89,7 +89,7 @@ High-throughput event processing
 Fault-tolerant messaging architecture
 Audit-ready data persistence layer
 Multi-channel alert distribution (email + queue-based systems)
- Engineering Challenges & Resolutions
+# Engineering Challenges & Resolutions
 1. Missing Observability Logs
 
 Issue: No logs appeared for fraud detection execution
@@ -110,7 +110,7 @@ Resolution: Recreated event subscriptions and validated event propagation
 
 Engineering Impact
 
-This project demonstrates enterprise-level cloud engineering capabilities:
+# This project demonstrates enterprise-level cloud engineering capabilities:
 
 Designing fault-tolerant distributed systems
 Implementing event-driven serverless architectures
@@ -124,7 +124,7 @@ API Gateway-based digital tax submission portal
 Real-time analytics dashboard for compliance officers
 Cross-region disaster recovery architecture
 Advanced anomaly detection using behavioural modelling
- Summary
+# Summary
 
 This project demonstrates how a modern government tax authority system can be architected using AWS serverless technologies to achieve:
 
