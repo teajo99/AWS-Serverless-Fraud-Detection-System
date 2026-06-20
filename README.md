@@ -1,6 +1,8 @@
 # Architecture Diagram 
 ![image alt](https://github.com/teajo99/-AWS-Serverless-Fraud-Detection-System/blob/86c36f9552cb3377bd055f0faef41596ce151ab5/aws-serverless-fraud-detection-system/Architecture%20Diagram.png)
 
+HMRC-inspired serverless tax fraud detection platform on AWS using an event-driven architecture. Tax submissions are routed through Amazon EventBridge to AWS Lambda processing functions, which store audit records in DynamoDB. A fraud detection Lambda evaluates transactions using rule-based logic and triggers alerts via Amazon SNS. Notifications are distributed to Amazon SQS and email subscribers, enabling real-time compliance monitoring and audit-ready financial processing.
+
 # HMRC-Grade Serverless Tax Fraud Detection Platform (AWS)
  Overview
 
